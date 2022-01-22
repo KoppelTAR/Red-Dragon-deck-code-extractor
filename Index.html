@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <style>
+  </style>
+    <title>WGrpa</title>
+    <script type="text/javascript">
+    var reader; 
+
+    
+    function checkFileAPI() {
+        if (window.File && window.FileReader && window.FileList && window.Blob) {
+            reader = new FileReader();
+            return true; 
+        } else {
+            alert('The File APIs are not fully supported by your browser. Fallback required.');
+            return false;
+        }
+    }
+
+    
+    function readText(filePath) {
+	
+	
+		
+		
+		
+        var output = ""; //placeholder for text output
+        if(filePath.files && filePath.files[0]) {           
+            reader.onload = function (e) {
+                output = e.target.result;
+                displayContents(output);
+            };//end onload()
+            reader.readAsText(filePath.files[0]);
+        }//end if html5 filelist support
+        else if(ActiveXObject && filePath) { //fallback to IE 6-8 support via ActiveX
+            try {
+                reader = new ActiveXObject("Scripting.FileSystemObject");
+                var file = reader.OpenTextFile(filePath, 1); //ActiveX File Object
+                output = file.ReadAll(); //text contents of file
+                file.Close(); //close file "input stream"
+                displayContents(output);
+            } catch (e) {
+                if (e.number == -2146827859) {
+                    alert('Unable to access local files due to browser security settings. ' + 
+                     'To overcome this, go to Tools->Internet Options->Security->Custom Level. ' + 
+                     'Find the setting for "Initialize and script ActiveX controls not marked as safe" and change it to "Enable" or "Prompt"'); 
+                }
+            }       
+        }
+        else { //this is where you could fallback to Java Applet, Flash or similar
+            return false;
+        }       
+        return true;
+    }   
+
+    /**
+     * display content using a basic HTML replacement
+     */
+    function displayContents(txt2) {
+        var el = document.getElementById('main'); 
+		var e2 = document.getElementById('main2'); 
+		var e3 = document.getElementById('main3');
+		
+		resetti();
+		
+		
+		
+		
+		
+		
+		var kokopaska = txt2 ;
+            
+          //  e3.innerHTML = kokopaska
+            
+            var pos1 = kokopaska.indexOf(":{");
+            var pos2 = kokopaska.indexOf("}star");
+			
+			var osapaska = kokopaska.substring(pos1 + 2, pos2);
+			if (xv1.value  == 2) { 
+			e3.innerHTML = kokopaska
+			}
+			
+			if (xv1.value == 1) { 
+			e3.innerHTML = osapaska
+			}
+			
+			for  ( i=0; i < 1000; i++ ){
+			
+			var pos3 = osapaska.indexOf("player_"+i+"\"" );
+            var pos4 = osapaska.indexOf("}", pos3);
+			
+			if (pos3>0 && pos4>0){
+			
+			var testipaska = osapaska.substring(pos3, pos4)
+			var pos5 = testipaska.indexOf("PlayerName");
+            var pos6 = testipaska.indexOf("\",", pos5);
+			var nimipaska = testipaska.substring(pos5 + 13, pos6);
+			var pos7 = testipaska.indexOf("PlayerAlliance");
+            var pos8 = testipaska.indexOf("\",", pos7);
+			// hato = 0   pact = 1
+           
+			var liittopaska = testipaska.substring(pos7 + 17, pos8);
+			
+			var pos9 = testipaska.indexOf("PlayerDeckContent");
+            var pos10 = testipaska.indexOf("\",", pos9);
+            
+			var deckcontent = testipaska.substring(pos9 + 20, pos10);
+			var pos11 = testipaska.indexOf("PlayerDeckName");
+            var pos12 = testipaska.indexOf("\",", pos11);
+            var decknimi = testipaska.substring(pos11 + 17, pos12);
+			
+			if (liittopaska < 1 ){
+			 el.innerHTML = el.innerHTML + liittopaska+ "&nbsp;&nbsp;&nbsp;"+ "<strong>" + nimipaska + "</strong>" + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "+ decknimi + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + deckcontent + "<br/>"
+			}
+		 	if (liittopaska > 0 ){
+			 e2.innerHTML = e2.innerHTML + liittopaska+  "&nbsp;&nbsp;&nbsp;"+"<strong>" + nimipaska + "</strong>" + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "+ decknimi + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + deckcontent + "<br/>"
+			}
+			
+			
+			
+			
+			}
+            }             
+           
+                        
+
+           }
+		function resetti() {
+		var e5 = document.getElementById('main'); 
+		var e6 = document.getElementById('main2'); 
+		var e7 = document.getElementById('main3');
+		
+		e5.innerHTML = "";
+		e6.innerHTML = "";
+		e7.innerHTML = "";
+		
+		
+		
+		
+		}
+		function resetti2() {
+		resetti()
+
+		filu.value = ""
+		
+       }
+	   function resetti3() {
+		resetti2()
+		xv1.value = ""
+
+		
+	 }
+	 
+	 function dump1() {
+		fuq.hidden = ""
+		main5.hidden = ""
+		xv1.value = "1"
+		main4.hidden = ""
+		
+       }
+	 
+	 function dump2() {
+		xv1.value = "2"
+
+		
+		
+       }
+	 
+	 
+	 
+	 
+	 
+</script>
+</head>
+<body onload="checkFileAPI();">
+    <div id="container">    
+        <input type="file" id="filu" onclick='resetti2()' accept=".wargamerpl2"onchange= 'readText(this)'      />
+		<button onclick='resetti3()'>Reset</button>
+		<button onclick='dump1()'> human readable dump</button>
+		<button id="fuq" hidden="hidden" onclick='dump2()'> whole file</button> <div id="main5" hidden="hidden"> whole file option has high change of crashing your browser,
+		with bigger files like 10v10 etc.</div>
+        <br/>
+
+		<hr/>  
+        <h3>Nato</h3>
+		<hr/> 
+        <div id="main">
+        
+
+		    
+        </div>
+		<br/>
+		<br/>
+		<h3>Pact</h3>
+		<hr/> 
+		<div id="main2">
+            
+        </div>
+		<br/>
+		<br/>
+		<br/>
+		<br/>
+		<br/>
+		<hr/> 	
+		<div id="main4" hidden="hidden">
+		Debug:
+		</div>
+		<br/>
+		<div id="main3">
+    </div>
+	<button hidden="hidden" id="xv1" value = "c">placeholder</button>
+	
+</body>
+</html>
