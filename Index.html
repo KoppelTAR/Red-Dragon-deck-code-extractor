@@ -3,7 +3,7 @@
   <head>
   <style>
   </style>
-    <title>WGrpa</title>
+    <title>RD Deck Viewer</title>
     <script type="text/javascript">
     var reader; 
 
@@ -62,59 +62,59 @@
 		var e2 = document.getElementById('main2'); 
 		var e3 = document.getElementById('main3');
 		
-		resetti();
+		reset();
 		
 		
 		
 		
 		
 		
-		var kokopaska = txt2 ;
+		var wholeInfo = txt2 ;
             
-          //  e3.innerHTML = kokopaska
+          //  e3.innerHTML = wholeInfo
             
-            var pos1 = kokopaska.indexOf(":{");
-            var pos2 = kokopaska.indexOf("}star");
+            var pos1 = wholeInfo.indexOf(":{");
+            var pos2 = wholeInfo.indexOf("}star");
 			
-			var osapaska = kokopaska.substring(pos1 + 2, pos2);
+			var part = wholeInfo.substring(pos1 + 2, pos2);
 			if (xv1.value  == 2) { 
-			e3.innerHTML = kokopaska
+			e3.innerHTML = wholeInfo
 			}
 			
 			if (xv1.value == 1) { 
-			e3.innerHTML = osapaska
+			e3.innerHTML = part
 			}
 			
 			for  ( i=0; i < 1000; i++ ){
 			
-			var pos3 = osapaska.indexOf("player_"+i+"\"" );
-            var pos4 = osapaska.indexOf("}", pos3);
+			var pos3 = part.indexOf("player_"+i+"\"" );
+            var pos4 = part.indexOf("}", pos3);
 			
 			if (pos3>0 && pos4>0){
 			
-			var testipaska = osapaska.substring(pos3, pos4)
-			var pos5 = testipaska.indexOf("PlayerName");
-            var pos6 = testipaska.indexOf("\",", pos5);
-			var nimipaska = testipaska.substring(pos5 + 13, pos6);
-			var pos7 = testipaska.indexOf("PlayerAlliance");
-            var pos8 = testipaska.indexOf("\",", pos7);
-			// hato = 0   pact = 1
+			var test = part.substring(pos3, pos4)
+			var pos5 = test.indexOf("PlayerName");
+            var pos6 = test.indexOf("\",", pos5);
+			var name = test.substring(pos5 + 13, pos6);
+			var pos7 = test.indexOf("PlayerAlliance");
+            var pos8 = test.indexOf("\",", pos7);
+			// nato = 0   pact = 1
            
-			var liittopaska = testipaska.substring(pos7 + 17, pos8);
+			var addInfo = test.substring(pos7 + 17, pos8);
 			
-			var pos9 = testipaska.indexOf("PlayerDeckContent");
-            var pos10 = testipaska.indexOf("\",", pos9);
+			var pos9 = test.indexOf("PlayerDeckContent");
+            var pos10 = test.indexOf("\",", pos9);
             
-			var deckcontent = testipaska.substring(pos9 + 20, pos10);
-			var pos11 = testipaska.indexOf("PlayerDeckName");
-            var pos12 = testipaska.indexOf("\",", pos11);
-            var decknimi = testipaska.substring(pos11 + 17, pos12);
+			var deckcontent = test.substring(pos9 + 20, pos10);
+			var pos11 = test.indexOf("PlayerDeckName");
+            var pos12 = test.indexOf("\",", pos11);
+            var deckName = test.substring(pos11 + 17, pos12);
 			
-			if (liittopaska < 1 ){
-			 el.innerHTML = el.innerHTML + liittopaska+ "&nbsp;&nbsp;&nbsp;"+ "<strong>" + nimipaska + "</strong>" + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "+ decknimi + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + deckcontent + "<br/>"
+			if (addInfo < 1 ){
+			 el.innerHTML = el.innerHTML + addInfo+ "&nbsp;&nbsp;&nbsp;"+ "<strong>" + name + "</strong>" + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "+ deckName + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + deckcontent + "<br/>"
 			}
-		 	if (liittopaska > 0 ){
-			 e2.innerHTML = e2.innerHTML + liittopaska+  "&nbsp;&nbsp;&nbsp;"+"<strong>" + nimipaska + "</strong>" + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "+ decknimi + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + deckcontent + "<br/>"
+		 	if (addInfo > 0 ){
+			 e2.innerHTML = e2.innerHTML + addInfo+  "&nbsp;&nbsp;&nbsp;"+"<strong>" + name + "</strong>" + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "+ deckName + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + deckcontent + "<br/>"
 			}
 			
 			
@@ -126,7 +126,7 @@
                         
 
            }
-		function resetti() {
+		function reset() {
 		var e5 = document.getElementById('main'); 
 		var e6 = document.getElementById('main2'); 
 		var e7 = document.getElementById('main3');
@@ -139,14 +139,14 @@
 		
 		
 		}
-		function resetti2() {
-		resetti()
+		function reset2() {
+		reset()
 
 		filu.value = ""
 		
        }
-	   function resetti3() {
-		resetti2()
+	   function reset3() {
+		reset2()
 		xv1.value = ""
 
 		
@@ -175,11 +175,8 @@
 </head>
 <body onload="checkFileAPI();">
     <div id="container">    
-        <input type="file" id="filu" onclick='resetti2()' accept=".wargamerpl2"onchange= 'readText(this)'      />
-		<button onclick='resetti3()'>Reset</button>
-		<button onclick='dump1()'> human readable dump</button>
-		<button id="fuq" hidden="hidden" onclick='dump2()'> whole file</button> <div id="main5" hidden="hidden"> whole file option has high change of crashing your browser,
-		with bigger files like 10v10 etc.</div>
+        <input type="file" id="filu" onclick='reset2()' accept=".wargamerpl2"onchange= 'readText(this)'      />
+		<button onclick='reset3()'>Reset</button>
         <br/>
 
 		<hr/>  
